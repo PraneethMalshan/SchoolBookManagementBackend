@@ -1,14 +1,18 @@
 package com.schoolbooks.bookManagement.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.concurrent.Flow;
 
 @Entity  //Entity ekak kiyala pennanna mee annotation eka daanawa.
 @Table(name="book")  //DB Table eke name eka change kara ganna oona nam mee annotation eka use karnna puluwan.
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 //@Builder
 public class Book {
 
