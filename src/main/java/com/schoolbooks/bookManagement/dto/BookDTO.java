@@ -8,13 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class BookDTO {
 
 //    Layers athara data passkaranne meeken. controller ekata data enne meken. frontend eketh mee wagee ekak thiinna oona.
-    private long id;
+    private int bookId;
     private String bookName;
     private int totalQuantity;
     private int remainingQuantity;

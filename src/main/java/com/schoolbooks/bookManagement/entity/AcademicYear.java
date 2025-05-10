@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Set;
 
 @Entity
-@Table(name="academic_year")
+@Table(name="academicYear")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

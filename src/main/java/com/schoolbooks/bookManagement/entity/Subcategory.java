@@ -1,13 +1,17 @@
 package com.schoolbooks.bookManagement.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
 @Entity
 @Table(name="subcategory")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Subcategory {
 
     @Id
