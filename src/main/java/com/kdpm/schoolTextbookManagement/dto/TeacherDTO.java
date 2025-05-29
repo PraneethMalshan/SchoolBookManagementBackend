@@ -1,5 +1,10 @@
 package com.kdpm.schoolTextbookManagement.dto;
 
+import lombok.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class TeacherDTO {
     private Long teacherId;
     private String fullName;

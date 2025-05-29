@@ -17,7 +17,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
-    private Long bookId;
+    private int bookId;
 
     @Column(name = "title")
     private String title;
@@ -41,7 +41,6 @@ public class Book {
     private String bookImage;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    @Column(name = "book_allocations")
     private List<BookAllocation> bookAllocations;
 
 }

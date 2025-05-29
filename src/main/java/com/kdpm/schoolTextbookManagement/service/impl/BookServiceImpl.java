@@ -1,0 +1,31 @@
+package com.kdpm.schoolTextbookManagement.service.impl;
+
+import com.kdpm.schoolTextbookManagement.dto.BookDTO;
+import com.kdpm.schoolTextbookManagement.entity.Book;
+import com.kdpm.schoolTextbookManagement.repository.BookRepository;
+import com.kdpm.schoolTextbookManagement.service.BookService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class BookServiceImpl implements BookService {
+
+    @Autowired
+    private BookRepository bookRepository;
+    @Autowired
+    private ModelMapper modelMapper;
+
+
+    @Override
+    public String saveBook(BookDTO bookDTO) {
+        Book book = modelMapper.map(bookDTO, Book.class);
+        if (!bookRepository.existsById(book.getBookId())){
+            bookRepository.save(book);
+            return book.getBookId() + " Saved Successfully ";
+        } else {
+            throw  new DuplicateKeyException("Already Added!!!");
+        }
+    }
+}
