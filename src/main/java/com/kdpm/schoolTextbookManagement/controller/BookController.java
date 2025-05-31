@@ -1,6 +1,7 @@
 package com.kdpm.schoolTextbookManagement.controller;
 
 import com.kdpm.schoolTextbookManagement.dto.BookDTO;
+import com.kdpm.schoolTextbookManagement.dto.request.BookUpdateDTO;
 import com.kdpm.schoolTextbookManagement.service.BookService;
 import com.kdpm.schoolTextbookManagement.util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,15 @@ public class BookController {
         return new ResponseEntity<StandardResponse>(
                 new StandardResponse(201,"Success", message),
                 HttpStatus.CREATED
+        );
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<StandardResponse> updateBook(@RequestBody BookUpdateDTO bookUpdateDTO){
+        String message = bookService.updateBook(bookUpdateDTO);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success", message),
+                HttpStatus.OK
         );
     }
 

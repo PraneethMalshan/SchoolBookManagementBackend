@@ -1,6 +1,7 @@
 package com.kdpm.schoolTextbookManagement.service.impl;
 
 import com.kdpm.schoolTextbookManagement.dto.BookDTO;
+import com.kdpm.schoolTextbookManagement.dto.request.BookUpdateDTO;
 import com.kdpm.schoolTextbookManagement.entity.Book;
 import com.kdpm.schoolTextbookManagement.repository.BookRepository;
 import com.kdpm.schoolTextbookManagement.service.BookService;
@@ -27,5 +28,28 @@ public class BookServiceImpl implements BookService {
         } else {
             throw  new DuplicateKeyException("Already Added!!!");
         }
+    }
+
+    @Override
+    public String updateBook(BookUpdateDTO bookUpdateDTO) {
+
+        if (bookRepository.existsById(bookUpdateDTO.getBookId())){
+            Book book = bookRepository.getReferenceById(bookUpdateDTO.getBookId());
+
+            book.setTitle(bookUpdateDTO.getTitle());
+            book.setSubject(bookUpdateDTO.getSubject());
+            book.setGrade(bookUpdateDTO.getGrade());
+            book.setTotalCount(bookUpdateDTO.getTotalCount());
+            book.setAvailableCount(bookUpdateDTO.getAvailableCount());
+            book.setReceivedDate(bookUpdateDTO.getReceivedDate());
+            book.setBookImage(bookUpdateDTO.getBookImage());
+
+            bookRepository.save(book);
+            return bookUpdateDTO.getTitle() + " Updated Successfully ";
+
+        } else {
+            throw new RuntimeException("No Data Found for that ID!!!");
+        }
+
     }
 }
