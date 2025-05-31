@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,6 +81,16 @@ public class BookServiceImpl implements BookService {
             throw new RuntimeException("No Book Found for that ID!!!");
         }
     }
+
+    @Override
+    public List<BookDTO> getAllBooks() {
+        List<Book> getAllBooks = bookRepository.findAll();
+
+        return getAllBooks.stream()
+                .map(book -> modelMapper.map(book, BookDTO.class))
+                .collect(Collectors.toList());
+    }
+
 
 
 }

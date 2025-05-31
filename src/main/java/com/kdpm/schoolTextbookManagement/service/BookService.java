@@ -17,4 +17,5 @@ public interface BookService {
 
     String deleteBook(int bookId);
 
+    List<BookDTO> getAllBooks();
 }
