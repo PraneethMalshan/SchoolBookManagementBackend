@@ -2,12 +2,15 @@ package com.kdpm.schoolTextbookManagement.controller;
 
 import com.kdpm.schoolTextbookManagement.dto.BookDTO;
 import com.kdpm.schoolTextbookManagement.dto.request.BookUpdateDTO;
+import com.kdpm.schoolTextbookManagement.dto.response.BookGetResponseDTO;
 import com.kdpm.schoolTextbookManagement.service.BookService;
 import com.kdpm.schoolTextbookManagement.util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/books")
@@ -38,10 +41,10 @@ public class BookController {
 
     @GetMapping(path = "get-by-id", params = "id")
     public ResponseEntity<StandardResponse> getBookById(@RequestParam(value = "id") int bookId){
-        BookDTO bookDTO = bookService.getBookById(bookId);
+        List<BookGetResponseDTO> bookGetResponseDTOS = bookService.getBookById(bookId);
         return new ResponseEntity<StandardResponse>(
 
-                new StandardResponse(200, "Found", bookDTO),
+                new StandardResponse(200, "Found", bookGetResponseDTOS),
                 HttpStatus.OK
         );
     }

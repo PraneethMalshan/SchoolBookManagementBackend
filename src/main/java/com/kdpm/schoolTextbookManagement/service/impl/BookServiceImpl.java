@@ -2,6 +2,7 @@ package com.kdpm.schoolTextbookManagement.service.impl;
 
 import com.kdpm.schoolTextbookManagement.dto.BookDTO;
 import com.kdpm.schoolTextbookManagement.dto.request.BookUpdateDTO;
+import com.kdpm.schoolTextbookManagement.dto.response.BookGetResponseDTO;
 import com.kdpm.schoolTextbookManagement.entity.Book;
 import com.kdpm.schoolTextbookManagement.repository.BookRepository;
 import com.kdpm.schoolTextbookManagement.service.BookService;
@@ -9,6 +10,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -54,10 +58,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDTO getBookById(int bookId) {
-        if (bookRepository.existsById(bookId)){
-            Book book = bookRepository.getReferenceById(bookId);
-            return modelMapper.map(book, BookDTO.class);
+    public List<BookGetResponseDTO> getBookById(int bookId) {
+        List<Book> books = bookRepository.findBookByBookId(bookId);
+        if (!books.isEmpty()){
+
+            List<BookGetResponseDTO> bookGetResponseDTOS = books.stream()
+                    .map(book -> modelMapper.map(book, BookGetResponseDTO.class))
+                    .collect(Collectors.toList());
+            return bookGetResponseDTOS;
         } else {
             throw new RuntimeException("No Data Found for that ID!!!");
         }

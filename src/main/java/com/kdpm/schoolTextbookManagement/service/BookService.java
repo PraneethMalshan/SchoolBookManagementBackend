@@ -2,7 +2,10 @@ package com.kdpm.schoolTextbookManagement.service;
 
 import com.kdpm.schoolTextbookManagement.dto.BookDTO;
 import com.kdpm.schoolTextbookManagement.dto.request.BookUpdateDTO;
+import com.kdpm.schoolTextbookManagement.dto.response.BookGetResponseDTO;
 import com.kdpm.schoolTextbookManagement.entity.Book;
+
+import java.util.List;
 
 public interface BookService {
 
@@ -10,6 +13,6 @@ public interface BookService {
 
     String updateBook(BookUpdateDTO bookUpdateDTO);
 
-    BookDTO getBookById(int bookId);
+    List<BookGetResponseDTO> getBookById(int bookId);
 
 }
