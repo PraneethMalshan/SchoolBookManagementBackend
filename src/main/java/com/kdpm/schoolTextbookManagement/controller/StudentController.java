@@ -1,0 +1,30 @@
+package com.kdpm.schoolTextbookManagement.controller;
+
+import com.kdpm.schoolTextbookManagement.dto.StudentDTO;
+import com.kdpm.schoolTextbookManagement.service.BookService;
+import com.kdpm.schoolTextbookManagement.service.StudentService;
+import com.kdpm.schoolTextbookManagement.util.StandardResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1/students")
+@CrossOrigin(origins = "http://localhost:3000")
+public class StudentController {
+
+    @Autowired
+    private StudentService studentService;
+
+
+    @PostMapping(path = {"/save"})
+    public ResponseEntity<StandardResponse> saveStudent(@RequestBody StudentDTO studentDTO){
+        String message = studentService.saveStudent(studentDTO);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(201, "Success", message),
+                HttpStatus.CREATED
+        );
+    }
+
+}

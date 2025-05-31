@@ -19,7 +19,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
-    private Long studentId;
+    private int studentId;
 
     @Column(name = "full_name")
     private String fullName;
