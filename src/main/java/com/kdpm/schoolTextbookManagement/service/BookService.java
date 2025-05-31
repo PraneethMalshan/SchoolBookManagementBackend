@@ -15,4 +15,6 @@ public interface BookService {
 
     List<BookGetResponseDTO> getBookById(int bookId);
 
+    String deleteBook(int bookId);
+
 }

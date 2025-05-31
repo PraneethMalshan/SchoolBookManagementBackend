@@ -70,4 +70,16 @@ public class BookServiceImpl implements BookService {
             throw new RuntimeException("No Data Found for that ID!!!");
         }
     }
+
+    @Override
+    public String deleteBook(int bookId) {
+        if (bookRepository.existsById(bookId)){
+            bookRepository.deleteBookByBookId(bookId);
+            return " Deleted Successfully " + bookId;
+        } else {
+            throw new RuntimeException("No Book Found for that ID!!!");
+        }
+    }
+
+
 }
