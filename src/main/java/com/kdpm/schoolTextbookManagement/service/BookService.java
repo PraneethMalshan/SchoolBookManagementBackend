@@ -9,4 +9,7 @@ public interface BookService {
     String saveBook(BookDTO bookDTO);
 
     String updateBook(BookUpdateDTO bookUpdateDTO);
+
+    BookDTO getBookById(int bookId);
+
 }

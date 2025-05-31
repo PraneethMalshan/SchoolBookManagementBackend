@@ -36,4 +36,14 @@ public class BookController {
         );
     }
 
+    @GetMapping(path = "get-by-id", params = "id")
+    public ResponseEntity<StandardResponse> getBookById(@RequestParam(value = "id") int bookId){
+        BookDTO bookDTO = bookService.getBookById(bookId);
+        return new ResponseEntity<StandardResponse>(
+
+                new StandardResponse(200, "Found", bookDTO),
+                HttpStatus.OK
+        );
+    }
+
 }

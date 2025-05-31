@@ -52,4 +52,14 @@ public class BookServiceImpl implements BookService {
         }
 
     }
+
+    @Override
+    public BookDTO getBookById(int bookId) {
+        if (bookRepository.existsById(bookId)){
+            Book book = bookRepository.getReferenceById(bookId);
+            return modelMapper.map(book, BookDTO.class);
+        } else {
+            throw new RuntimeException("No Data Found for that ID!!!");
+        }
+    }
 }
