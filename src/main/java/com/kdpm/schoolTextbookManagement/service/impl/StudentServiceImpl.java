@@ -1,6 +1,7 @@
 package com.kdpm.schoolTextbookManagement.service.impl;
 
 import com.kdpm.schoolTextbookManagement.dto.StudentDTO;
+import com.kdpm.schoolTextbookManagement.dto.request.StudentUpdateDTO;
 import com.kdpm.schoolTextbookManagement.entity.Student;
 import com.kdpm.schoolTextbookManagement.repository.StudentRepo;
 import com.kdpm.schoolTextbookManagement.service.StudentService;
@@ -23,6 +24,25 @@ public class StudentServiceImpl implements StudentService {
             return student.getStudentId() + " Saved Successfully ";
         } else {
             throw  new RuntimeException("Already Added!!!");
+        }
+    }
+
+    @Override
+    public String updateStudent(StudentUpdateDTO studentUpdateDTO) {
+        if (studentRepo.existsById(studentUpdateDTO.getStudentId())){
+            Student student = studentRepo.getReferenceById(studentUpdateDTO.getStudentId());
+
+            student.setFullName(studentUpdateDTO.getFullName());
+            student.setGrade(studentUpdateDTO.getGrade());
+            student.setSubjectStream(studentUpdateDTO.getSubjectStream());
+            student.setClassName(studentUpdateDTO.getClassName());
+            student.setStudentImage(studentUpdateDTO.getStudentImage());
+
+            studentRepo.save(student);
+            return studentUpdateDTO.getFullName() + " Updated Successfully ";
+
+        } else {
+            throw new RuntimeException("No Data Found for that ID!!!");
         }
     }
 }
