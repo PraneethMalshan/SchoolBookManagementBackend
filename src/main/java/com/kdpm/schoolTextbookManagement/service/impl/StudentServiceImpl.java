@@ -72,4 +72,13 @@ public class StudentServiceImpl implements StudentService {
             throw new RuntimeException("No Student Found for that ID!!!");
         }
     }
+
+    @Override
+    public List<StudentDTO> getAllStudents() {
+        List<Student> getAllStudents = studentRepo.findAll();
+
+        return getAllStudents.stream()
+                .map(student -> modelMapper.map(student, StudentDTO.class))
+                .collect(Collectors.toList());
+    }
 }

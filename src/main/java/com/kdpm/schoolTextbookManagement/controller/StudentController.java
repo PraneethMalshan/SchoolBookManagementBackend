@@ -58,4 +58,13 @@ public class StudentController {
         );
     }
 
+    @GetMapping(path = "/get-all-students")
+    public ResponseEntity<StandardResponse> getAllStudents(){
+        List<StudentDTO> allStudents = studentService.getAllStudents();
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", allStudents),
+                HttpStatus.OK
+        );
+    }
+
 }

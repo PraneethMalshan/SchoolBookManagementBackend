@@ -16,4 +16,6 @@ public interface StudentService {
 
     String deleteStudent(int studentId);
 
+    List<StudentDTO> getAllStudents();
+
 }
