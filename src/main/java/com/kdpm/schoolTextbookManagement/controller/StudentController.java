@@ -40,11 +40,20 @@ public class StudentController {
         );
     }
 
-    @GetMapping(path = "get-by-id", params = "id")
+    @GetMapping(path = "/get-by-id", params = "id")
     public ResponseEntity<StandardResponse> getStudentById(@RequestParam(value = "id") int studentId){
         List<StudentGetResponseDTO> studentGetResponseDTOS  = studentService.getStudentById(studentId);
         return new ResponseEntity<StandardResponse>(
                 new StandardResponse(200, "Found", studentGetResponseDTOS),
+                HttpStatus.OK
+        );
+    }
+
+    @DeleteMapping(path = "/delete-student/{id}")
+    public ResponseEntity<StandardResponse> deleteStudent(@PathVariable(value = "id") int studentId){
+        String message = studentService.deleteStudent(studentId);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(204, "Success", message),
                 HttpStatus.OK
         );
     }

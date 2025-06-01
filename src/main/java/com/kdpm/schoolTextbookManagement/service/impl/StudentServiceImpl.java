@@ -62,4 +62,14 @@ public class StudentServiceImpl implements StudentService {
             throw new RuntimeException("No Data Found for that ID!!!");
         }
     }
+
+    @Override
+    public String deleteStudent(int studentId) {
+        if (studentRepo.existsById(studentId)){
+            studentRepo.deleteStudentByStudentId(studentId);
+            return " Deleted Successfully " + studentId;
+        } else {
+            throw new RuntimeException("No Student Found for that ID!!!");
+        }
+    }
 }
