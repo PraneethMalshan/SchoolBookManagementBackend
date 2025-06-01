@@ -2,6 +2,7 @@ package com.kdpm.schoolTextbookManagement.controller;
 
 import com.kdpm.schoolTextbookManagement.dto.StudentDTO;
 import com.kdpm.schoolTextbookManagement.dto.request.StudentUpdateDTO;
+import com.kdpm.schoolTextbookManagement.dto.response.StudentGetResponseDTO;
 import com.kdpm.schoolTextbookManagement.service.BookService;
 import com.kdpm.schoolTextbookManagement.service.StudentService;
 import com.kdpm.schoolTextbookManagement.util.StandardResponse;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/students")
@@ -38,10 +41,10 @@ public class StudentController {
     }
 
     @GetMapping(path = "get-by-id", params = "id")
-    public ResponseEntity<StandardResponse> getStudentId(@RequestParam(value = "id") int studentId){
-        StudentDTO studentDTO = studentService.getStudentById(studentId);
+    public ResponseEntity<StandardResponse> getStudentById(@RequestParam(value = "id") int studentId){
+        List<StudentGetResponseDTO> studentGetResponseDTOS  = studentService.getStudentById(studentId);
         return new ResponseEntity<StandardResponse>(
-                new StandardResponse(200, "Found", studentDTO),
+                new StandardResponse(200, "Found", studentGetResponseDTOS),
                 HttpStatus.OK
         );
     }

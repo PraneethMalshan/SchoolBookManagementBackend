@@ -2,12 +2,16 @@ package com.kdpm.schoolTextbookManagement.service.impl;
 
 import com.kdpm.schoolTextbookManagement.dto.StudentDTO;
 import com.kdpm.schoolTextbookManagement.dto.request.StudentUpdateDTO;
+import com.kdpm.schoolTextbookManagement.dto.response.StudentGetResponseDTO;
 import com.kdpm.schoolTextbookManagement.entity.Student;
 import com.kdpm.schoolTextbookManagement.repository.StudentRepo;
 import com.kdpm.schoolTextbookManagement.service.StudentService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -47,10 +51,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentDTO getStudentById(int studentId) {
-        if (studentRepo.existsById(studentId)){
-            Student student = studentRepo.getReferenceById(studentId);
-            return modelMapper.map(student, StudentDTO.class);
+    public List<StudentGetResponseDTO> getStudentById(int studentId) {
+        List<Student> students = studentRepo.findStudentByStudentId(studentId);
+        if (!students.isEmpty()){
+            List<StudentGetResponseDTO> studentGetResponseDTOS = students.stream()
+                    .map(student -> modelMapper.map(student, StudentGetResponseDTO.class))
+                    .collect(Collectors.toList());
+            return studentGetResponseDTOS;
         } else {
             throw new RuntimeException("No Data Found for that ID!!!");
         }
