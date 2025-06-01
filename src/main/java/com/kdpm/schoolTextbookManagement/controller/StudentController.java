@@ -37,4 +37,13 @@ public class StudentController {
         );
     }
 
+    @GetMapping(path = "get-by-id", params = "id")
+    public ResponseEntity<StandardResponse> getStudentId(@RequestParam(value = "id") int studentId){
+        StudentDTO studentDTO = studentService.getStudentById(studentId);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Found", studentDTO),
+                HttpStatus.OK
+        );
+    }
+
 }

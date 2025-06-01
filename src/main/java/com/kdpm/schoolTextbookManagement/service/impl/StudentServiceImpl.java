@@ -45,4 +45,14 @@ public class StudentServiceImpl implements StudentService {
             throw new RuntimeException("No Data Found for that ID!!!");
         }
     }
+
+    @Override
+    public StudentDTO getStudentById(int studentId) {
+        if (studentRepo.existsById(studentId)){
+            Student student = studentRepo.getReferenceById(studentId);
+            return modelMapper.map(student, StudentDTO.class);
+        } else {
+            throw new RuntimeException("No Data Found for that ID!!!");
+        }
+    }
 }
