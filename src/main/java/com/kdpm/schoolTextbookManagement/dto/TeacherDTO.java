@@ -6,7 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class TeacherDTO {
-    private Long teacherId;
+    private int teacherId;
     private String fullName;
     private String subject;
     private String grade;
