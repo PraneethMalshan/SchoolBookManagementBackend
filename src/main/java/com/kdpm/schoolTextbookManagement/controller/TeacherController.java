@@ -1,6 +1,7 @@
 package com.kdpm.schoolTextbookManagement.controller;
 
 import com.kdpm.schoolTextbookManagement.dto.TeacherDTO;
+import com.kdpm.schoolTextbookManagement.dto.request.TeacherUpdateDTO;
 import com.kdpm.schoolTextbookManagement.entity.Teacher;
 import com.kdpm.schoolTextbookManagement.service.TeacherService;
 import com.kdpm.schoolTextbookManagement.util.StandardResponse;
@@ -22,6 +23,15 @@ public class TeacherController {
         return new ResponseEntity<StandardResponse>(
                 new StandardResponse(201, "Success", message),
                 HttpStatus.CREATED
+        );
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<StandardResponse> updateTeacher(@RequestBody TeacherUpdateDTO teacherUpdateDTO) {
+        String message = teacherService.updateTeacher(teacherUpdateDTO);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", message),
+                HttpStatus.OK
         );
     }
 
