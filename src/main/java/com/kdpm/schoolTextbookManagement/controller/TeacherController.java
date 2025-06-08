@@ -59,4 +59,13 @@ public class TeacherController {
 
     }
 
+    @GetMapping(path = "/get-all-teachers")
+    public ResponseEntity<StandardResponse> getAllTeachers() {
+        List<TeacherDTO> allTeachers = teacherService.getAllTeachers();
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200, "Success", allTeachers),
+                HttpStatus.OK
+        );
+    }
+
 }

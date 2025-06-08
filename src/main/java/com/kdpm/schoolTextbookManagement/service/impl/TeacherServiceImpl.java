@@ -72,4 +72,12 @@ public class TeacherServiceImpl implements TeacherService {
             throw new RuntimeException("No Teacher Found for that ID!!!");
         }
     }
+
+    @Override
+    public List<TeacherDTO> getAllTeachers() {
+        List<Teacher> getAllTeachers = teacherRepo.findAll();
+        return getAllTeachers.stream()
+                .map(teacher -> modelMapper.map(teacher, TeacherDTO.class))
+                .collect(Collectors.toList());
+    }
 }
