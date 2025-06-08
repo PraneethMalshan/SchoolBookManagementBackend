@@ -62,4 +62,14 @@ public class TeacherServiceImpl implements TeacherService {
             throw new RuntimeException("No Data Found for that ID!!!");
         }
     }
+
+    @Override
+    public String deleteTeacher(int teacherId) {
+        if (teacherRepo.existsById(teacherId)) {
+            teacherRepo.deleteTeacherByTeacherId(teacherId);
+            return "Deleted Successfully" + teacherId;
+        } else {
+            throw new RuntimeException("No Teacher Found for that ID!!!");
+        }
+    }
 }

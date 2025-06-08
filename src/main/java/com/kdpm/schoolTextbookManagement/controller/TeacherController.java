@@ -48,4 +48,15 @@ public class TeacherController {
 
     }
 
+    @DeleteMapping(path = "delete-teacher/{id}")
+    public ResponseEntity<StandardResponse> deleteTeacher(@PathVariable(value = "id") int teacherId) {
+
+        String message = teacherService.deleteTeacher(teacherId);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(204, "Success", message),
+                HttpStatus.OK
+        );
+
+    }
+
 }

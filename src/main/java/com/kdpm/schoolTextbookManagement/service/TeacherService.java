@@ -13,4 +13,5 @@ public interface TeacherService {
 
     List<TeacherGetResponseDTO> getTeacherById(int id);
 
+    String deleteTeacher(int teacherId);
 }
