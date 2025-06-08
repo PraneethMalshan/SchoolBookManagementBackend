@@ -2,12 +2,17 @@ package com.kdpm.schoolTextbookManagement.service.impl;
 
 import com.kdpm.schoolTextbookManagement.dto.TeacherDTO;
 import com.kdpm.schoolTextbookManagement.dto.request.TeacherUpdateDTO;
+import com.kdpm.schoolTextbookManagement.dto.response.TeacherGetResponseDTO;
 import com.kdpm.schoolTextbookManagement.entity.Teacher;
 import com.kdpm.schoolTextbookManagement.repository.TeacherRepo;
 import com.kdpm.schoolTextbookManagement.service.TeacherService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -40,6 +45,19 @@ public class TeacherServiceImpl implements TeacherService {
             teacherRepo.save(teacher);
             return teacher.getFullName() + "Updated Successfully";
 
+        } else {
+            throw new RuntimeException("No Data Found for that ID!!!");
+        }
+    }
+
+    @Override
+    public List<TeacherGetResponseDTO> getTeacherById(int id) {
+        List<Teacher> teachers = teacherRepo.findTeacherByTeacherId(id);
+        if (!teachers.isEmpty()) {
+            List<TeacherGetResponseDTO> teacherGetResponseDTOs = teachers.stream()
+                    .map(teacher -> modelMapper.map(teacher, TeacherGetResponseDTO.class))
+                    .collect(Collectors.toList());
+                return teacherGetResponseDTOs;
         } else {
             throw new RuntimeException("No Data Found for that ID!!!");
         }
